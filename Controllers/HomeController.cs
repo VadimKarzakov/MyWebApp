@@ -7,16 +7,30 @@ namespace MyWebApp.Controllers
     public class HomeController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public ContentResult Get()
         {
-            var links = new
-            {
-                HealthCheck = Url.Action("Get", "HealthCheck", null, Request.Scheme),
-                Item1 = Url.Action("Get", "Item1", null, Request.Scheme),
-                Item2 = Url.Action("Get", "Item2", null, Request.Scheme)
-            };
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
 
-            return Ok(links);
+            var htmlContent = $@"
+                <html>
+                <head>
+                    <title>Home</title>
+                </head>
+                <body>
+                    <h1>Welcome to MyWebApp</h1>
+                    <ul>
+                        <li><a href='{baseUrl}/api/HealthCheck'>HealthCheck</a></li>
+                        <li><a href='{baseUrl}/api/Item1'>Item1</a></li>
+                        <li><a href='{baseUrl}/api/Item2'>Item2</a></li>
+                    </ul>
+                </body>
+                </html>";
+
+            return new ContentResult
+            {
+                ContentType = "text/html",
+                Content = htmlContent
+            };
         }
     }
 }
