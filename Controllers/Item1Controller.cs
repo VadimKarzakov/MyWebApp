@@ -10,14 +10,13 @@ namespace MyWebApp.Controllers
     {
         private static List<Item1> items = new List<Item1>();
 
-        // GET api/item1
         [HttpGet]
         public string Get()
         {
-            return "Hello item1";
+            return "id1:Jamgo,id2:Smart,id3:Restin,id4:Man";
         }
 
-        // POST api/item1
+        [HttpPost]
         public void Post([FromBody] Item1 item)
         {
             items.Add(item);

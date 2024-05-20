@@ -1,32 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyWebApp.Models;
-using System.Diagnostics;
 
 namespace MyWebApp.Controllers
 {
-    public class HomeController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet]
+        public IActionResult Get()
         {
-            _logger = logger;
-        }
+            var links = new
+            {
+                HealthCheck = Url.Action("Get", "HealthCheck", null, Request.Scheme),
+                Item1 = Url.Action("Get", "Item1", null, Request.Scheme),
+                Item2 = Url.Action("Get", "Item2", null, Request.Scheme)
+            };
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Ok(links);
         }
     }
 }

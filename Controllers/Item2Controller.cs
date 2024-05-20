@@ -10,14 +10,12 @@ namespace MyWebApp.Controllers
     {
         private static List<Item2> items = new List<Item2>();
 
-        // GET api/item2
         [HttpGet]
         public string Get()
         {
-            return "Hello item2";
+            return "Apa.serht.serv.1923";
         }
 
-        // POST api/item2
         [HttpPost]
         public void Post([FromBody] Item2 item)
         {
